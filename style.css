@@ -1,0 +1,53 @@
+body{
+    background-color: #34495e;
+    color:white;
+}
+
+th{
+    color:lightgrey;
+}
+.login-container{
+    padding-top:50px;
+    display:block;
+}
+.login{
+    background-color:#2C3A47;
+    box-shadow: 10px 10px 5px 0px #2C3A47;
+    border:1px solid grey;
+    border-radius:20px;
+    width:50%;
+    padding:10px;
+}
+
+.login input[type = "text"],.login input[type = "number"],.login input[type = "password"]{
+    border:0;
+    background: none;
+    color:grey;
+    border:1px solid #3498db;
+    border-radius: 14px;
+}
+
+#error-msg{
+    display: none;
+}
+
+.dashboard{
+    display: none;
+}
+
+.entry-box{
+    color:lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:#2C3A47;
+    border:1px solid grey;
+    border-radius:20px;
+}
+
+.entry-box input[type = "text"],.entry-box input[type = "number"]{
+    border:0;
+    background: none;
+    color:lightgrey;
+    border:1px solid #3498db;
+    padding-left: 4px;
+}
