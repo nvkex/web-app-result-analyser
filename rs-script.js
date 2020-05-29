@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     $("#loginBtn").click(function () {
         if ($("#studentPass").val() == studentPassword[0]) {
-            $(".login-container").fadeOut();
+            $(".login-container").fadeOut(200);
             $("#displayName").text(currentStudent.split(" ")[0]);
             $(".dashboard").fadeIn(3000);
         }
