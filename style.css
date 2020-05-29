@@ -1,6 +1,8 @@
 body{
     background-color: #34495e;
     color:white;
+    font-family: 'rubik', sans-serif;
+    overflow:hidden;
 }
 
 th{
@@ -11,9 +13,10 @@ th{
     display:block;
 }
 .login{
+    max-width:50%;
     background-color:#2C3A47;
-    box-shadow: 10px 10px 5px 0px #2C3A47;
-    border:1px solid grey;
+    /*box-shadow: 10px 10px 5px 0px #2C3A47;*/
+    border:0px solid grey;
     border-radius:20px;
     width:50%;
     padding:10px;
