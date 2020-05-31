@@ -4,27 +4,66 @@
  *               Signup
  *                 ||
  * About page --> Login --> Dashboard --> Result Display
- *   
  * 
+ * APP STAGES:
+ * 0 --> About Page
+ * 1A --> Login Page
+ * 1B --> SignUp Page
+ * 2 --> Dashboard
+ * 3 --> Result Display
  */
 
 const dashboardTable = document.querySelector('#subjectData');
+var stage = "0";
 var studentNameArray = ["A B"];
 var studentRollNoArray = [1810991169];
 var studentPassword = ["123456"];
 var currentStudentIndex = 0;
 var currentStudent = studentNameArray[currentStudentIndex];
 $(document).ready(function () {
+    
+    //Setting current stage
+    function setStage(level){
+        stage = level;
+    }
+
+    // Rendering document according to the stage
+    function renderDoc(){
+        if(stage == "0"){
+            $('.app-info').show();
+            $(".login-container").show();
+            $(".dashboard").hide();
+            $('.result-container').hide();
+        }
+        else if(stage == "1A"){
+            $('.app-info').hide();
+            $(".login-container").show();
+            $(".dashboard").hide();
+            $('.result-container').hide();
+        }
+        else if(stage == "2"){
+            $('.app-info').hide();
+            $(".login-container").hide();
+            $(".dashboard").show();
+            $('.result-container').hide();
+        }
+        else if(stage == "3"){
+            $('.app-info').hide();
+            $(".login-container").hide();
+            $(".dashboard").hide();
+            $('.result-container').show();
+        }
+    }
 
     // only login page visible initially
     $("#error-msg").hide();
-    $(".dashboard").hide();
-    $('.result-container').hide();
+    renderDoc();
 
     // switch to login page
     $('#getStarted').click(() => {
         $('.about').css("transform", "rotateX(100deg)");
         $('.app-info').fadeOut(800);
+        setStage("1A");
     });
 
     // on successful login switch to dashboard
@@ -33,6 +72,7 @@ $(document).ready(function () {
             $(".login-container").fadeOut(200);
             $("#displayName").text(currentStudent.split(" ")[0]);
             $(".dashboard").fadeIn(3000);
+            setStage("2");
         }
         else {
             $('#error-msg').fadeIn();
@@ -43,7 +83,9 @@ $(document).ready(function () {
         // switch from dashboard to graph canvas
         $(".dashboard").fadeOut(200);
         $('.result-container').fadeIn(3000);
-        
+
+        setStage("3");
+
         // Get user data
         const labels = Array.from(document.querySelectorAll('.label'));
         const marks = Array.from(document.querySelectorAll('.mrks'));
@@ -55,7 +97,7 @@ $(document).ready(function () {
          * Render Graph in Canvas
          * 
          * Current Libraries: CanvasJS
-         * To be added: Google Charts
+         * Options: Google Charts, D3JS
          * 
          */
 
