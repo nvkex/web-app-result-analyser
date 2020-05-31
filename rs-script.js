@@ -1,9 +1,9 @@
 /**
  * APP ROUTE:
  * 
- *      Signup
- *        ||
- *      Login --> Dashboard --> Result Display
+ *               Signup
+ *                 ||
+ * About page --> Login --> Dashboard --> Result Display
  *   
  * 
  */
@@ -20,6 +20,12 @@ $(document).ready(function () {
     $("#error-msg").hide();
     $(".dashboard").hide();
     $('.result-container').hide();
+
+    // switch to login page
+    $('#getStarted').click(() => {
+        $('.about').css("transform", "rotateX(100deg)");
+        $('.app-info').fadeOut(800);
+    });
 
     // on successful login switch to dashboard
     $("#loginBtn").click(function () {
@@ -45,7 +51,15 @@ $(document).ready(function () {
             return {y: marks[index].value, label: lbl.value}
         });
 
-        // render graph in canvas
+        /**
+         * Render Graph in Canvas
+         * 
+         * Current Libraries: CanvasJS
+         * To be added: Google Charts
+         * 
+         */
+
+        //CanvasJS
         var chart = new CanvasJS.Chart("graphCanvas", {
             animationEnabled: true,
             theme: "dark2",
@@ -67,6 +81,8 @@ $(document).ready(function () {
             }]
         });
         chart.render();
+
+        //Google Charts
 
     });
 
