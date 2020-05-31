@@ -1,6 +1,14 @@
-var loginBox = true;
-var studentDashboard = false;
-var resultArea = false;
+/**
+ * APP ROUTE:
+ * 
+ *      Signup
+ *        ||
+ *      Login --> Dashboard --> Result Display
+ *   
+ * 
+ */
+
+const dashboardTable = document.querySelector('#subjectData');
 var studentNameArray = ["A B"];
 var studentRollNoArray = [1810991169];
 var studentPassword = ["123456"];
@@ -11,6 +19,7 @@ $(document).ready(function () {
     // only login page visible initially
     $("#error-msg").hide();
     $(".dashboard").hide();
+    $('.result-container').hide();
 
     // on successful login switch to dashboard
     $("#loginBtn").click(function () {
@@ -28,26 +37,32 @@ $(document).ready(function () {
         // switch from dashboard to graph canvas
         $(".dashboard").fadeOut(200);
         $('.result-container').fadeIn(3000);
+        
+        // Get user data
+        const labels = Array.from(document.querySelectorAll('.label'));
+        const marks = Array.from(document.querySelectorAll('.mrks'));
+        const stuData = labels.map( (lbl, index) => {
+            return {y: marks[index].value, label: lbl.value}
+        });
 
-        // Get graphical representation of data from canvasjs
+        // render graph in canvas
         var chart = new CanvasJS.Chart("graphCanvas", {
             animationEnabled: true,
             theme: "dark2",
             title: {
                 text: "Student Report"
             },
-
             axisY: {
                 title: "Marks"
             },
             data: [{
                 type: "column",
                 dataPoints: [
-                    { y: 60, label: "DM" },
-                    { y: 30, label: "DBMS" },
-                    { y: 75, label: "AWT" },
-                    { y: 21, label: "JAVA" },
-                    { y: 87, label: "OS" }
+                   {y: parseInt(stuData[0].y), label: stuData[0].label},
+                   {y: parseInt(stuData[1].y), label: stuData[1].label},
+                   {y: parseInt(stuData[2].y), label: stuData[2].label},
+                   {y: parseInt(stuData[3].y), label: stuData[3].label},
+                   {y: parseInt(stuData[4].y), label: stuData[4].label}
                 ]
             }]
         });
