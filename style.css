@@ -43,7 +43,7 @@ th{
     padding-top: 10px;
     padding-bottom: 10px;
     background-color:#2C3A47;
-    border:1px solid grey;
+    border:0px solid grey;
     border-radius:20px;
 }
 
@@ -54,3 +54,13 @@ th{
     border:1px solid #3498db;
     padding-left: 4px;
 }
+
+.result-container{
+    margin:100px 0px auto;
+    height:500px;
+    color:lightgrey;
+    padding:50px;
+    background-color:#2C3A47;
+    border-radius:20px;
+}
+
