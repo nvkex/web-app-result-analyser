@@ -14,7 +14,7 @@
  */
 
 const dashboardTable = document.querySelector('#subjectData');
-var stage = "0";
+var stage;
 var studentNameArray = ["A B"];
 var studentRollNoArray = [1810991169];
 var studentPassword = ["123456"];
@@ -22,9 +22,15 @@ var currentStudentIndex = 0;
 var currentStudent = studentNameArray[currentStudentIndex];
 $(document).ready(function () {
     
-    //Setting current stage
+    // Initialize stage
+    function initStage(){
+        stage = localStorage.getItem('stage') != null ? localStorage.getItem('stage') : "0";
+    }
+
+    // Setting current stage
     function setStage(level){
         stage = level;
+        localStorage.setItem('stage', stage);
     }
 
     // Rendering document according to the stage
@@ -57,6 +63,7 @@ $(document).ready(function () {
 
     // only login page visible initially
     $("#error-msg").hide();
+    initStage();
     renderDoc();
 
     // switch to login page
@@ -80,12 +87,13 @@ $(document).ready(function () {
     });
 
     $('#submitData').click(() => {
+
         // switch from dashboard to graph canvas
         $(".dashboard").fadeOut(200);
         $('.result-container').fadeIn(3000);
 
         setStage("3");
-
+        console.log(localStorage.getItem('stage'));
         // Get user data
         const labels = Array.from(document.querySelectorAll('.label'));
         const marks = Array.from(document.querySelectorAll('.mrks'));
