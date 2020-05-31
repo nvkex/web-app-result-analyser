@@ -6,6 +6,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <link rel = "stylesheet" href = "style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -26,7 +27,7 @@
 
             <!-- Login dialog box -->
             
-            <div class = "login-container" align = "center">
+            <div class = "login-container d-none" align = "center">
                 <div class = "login">
                     <h1 class = "display-2" style = "color:white">Login</h1>
                     <br>
@@ -64,46 +65,46 @@
             <!-- STUDENT DASHBOARD -->
             <!-- This body is hidden initially and will be displayed after login-->
 
-            <div class = "dashboard">
+            <div class = "dashboard d-none">
                 <br>
                 <h1 class = "display-3">Welcome <span id = "displayName"></span>!</h1>
 
                 <div class = "entry-box container" align = "center">
                     <h1 style = "font-family:'Courier New', Courier, monospace">Subject Data</h1>
                     <br>
-                    <table cellpadding = "20">
+                    <table cellpadding = "20" id = "subjectData">
                         <tr>
                             <th>Subject</th>
                             <th>Marks</th>
                             <th>Max Marks</th>
                         </tr>
                         <tr>
-                            <td><input type = "text"></td>
-                            <td><input type = "number"></td>
-                            <td><input type = "number"></td>
+                            <td><input type = "text" required></td>
+                            <td><input type = "number" required></td>
+                            <td><input type = "number" required></td>
                         </tr>
                         <tr>
-                            <td><input type = "text"></td>
-                            <td><input type = "number"></td>
-                            <td><input type = "number"></td>
+                            <td><input type = "text" required></td>
+                            <td><input type = "number" required></td>
+                            <td><input type = "number" required></td>
                         </tr>
                         <tr>
-                            <td><input type = "text"></td>
-                            <td><input type = "number"></td>
-                            <td><input type = "number"></td>
+                            <td><input type = "text" required></td>
+                            <td><input type = "number" required></td>
+                            <td><input type = "number" required></td>
                         </tr>
                         <tr>
-                            <td><input type = "text"></td>
-                            <td><input type = "number"></td>
-                            <td><input type = "number"></td>
+                            <td><input type = "text" required></td>
+                            <td><input type = "number" required></td>
+                            <td><input type = "number" required></td>
                         </tr>
                         <tr>
-                            <td><input type = "text"></td>
-                            <td><input type = "number"></td>
-                            <td><input type = "number"></td>
+                            <td><input type = "text" required></td>
+                            <td><input type = "number" required></td>
+                            <td><input type = "number" required></td>
                         </tr>
                         <tr>
-                            <td colspan = "3" align = "center"><button class = "btn btn-outline-info">Submit</button></td>
+                            <td colspan = "3" align = "center"><button class = "btn btn-outline-info" id="submitData">Submit</button></td>
                         </tr>
                     </table>
                 </div>
@@ -111,12 +112,17 @@
 
             <!-- Report Card -->
 
-            <div class = "report">
-
+            <div class = "container result-container">
+                <div id = "graphCanvas">
+                    
+                </div>
             </div>
         </div>
 
         <!-- Main Script -->
         <script src = "rs-script.js"></script>
+
+        <!-- canvasjs -->
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </body>
 </html>
