@@ -14,7 +14,10 @@
  */
 
 const dashboardTable = document.querySelector('#subjectData');
+const backBtn = document.querySelector('#back');
+const resetBtn = document.querySelector('#resetDoc');
 var stage;
+var currUsr = null;
 var studentNameArray = ["A B"];
 var studentRollNoArray = [1810991169];
 var studentPassword = ["123456"];
@@ -25,12 +28,22 @@ $(document).ready(function () {
     // Initialize stage
     function initStage(){
         stage = localStorage.getItem('stage') != null ? localStorage.getItem('stage') : "0";
+        currUsr = localStorage.getItem('loggedInUser') != null ? localStorage.getItem('loggedInUser') : null;
     }
 
     // Setting current stage
     function setStage(level){
         stage = level;
         localStorage.setItem('stage', stage);
+    }
+
+    function login(userID){
+        currUsr = userID;
+        localStorage.setItem('loggedInUser', currUsr);
+    }
+
+    function logout(){
+        localStorage.setItem('loggedInUser', null);
     }
 
     // Rendering document according to the stage
@@ -50,6 +63,7 @@ $(document).ready(function () {
         else if(stage == "2"){
             $('.app-info').hide();
             $(".login-container").hide();
+            $("#displayName").text(currUsr);
             $(".dashboard").show();
             $('.result-container').hide();
         }
@@ -77,7 +91,8 @@ $(document).ready(function () {
     $("#loginBtn").click(function () {
         if ($("#studentPass").val() == studentPassword[0]) {
             $(".login-container").fadeOut(200);
-            $("#displayName").text(currentStudent.split(" ")[0]);
+            login(currentStudent.split(" ")[0]);
+            $("#displayName").text(currUsr);
             $(".dashboard").fadeIn(3000);
             setStage("2");
         }
@@ -86,6 +101,14 @@ $(document).ready(function () {
         }
     });
 
+    /**
+    * Render Graph in Canvas
+    * 
+    * Current Libraries: CanvasJS
+    * Options: Google Charts, D3JS
+    * 
+    */
+
     $('#submitData').click(() => {
 
         // switch from dashboard to graph canvas
@@ -93,21 +116,13 @@ $(document).ready(function () {
         $('.result-container').fadeIn(3000);
 
         setStage("3");
-        console.log(localStorage.getItem('stage'));
+        
         // Get user data
         const labels = Array.from(document.querySelectorAll('.label'));
         const marks = Array.from(document.querySelectorAll('.mrks'));
         const stuData = labels.map( (lbl, index) => {
             return {y: marks[index].value, label: lbl.value}
         });
-
-        /**
-         * Render Graph in Canvas
-         * 
-         * Current Libraries: CanvasJS
-         * Options: Google Charts, D3JS
-         * 
-         */
 
         //CanvasJS
         var chart = new CanvasJS.Chart("graphCanvas", {
@@ -132,9 +147,25 @@ $(document).ready(function () {
         });
         chart.render();
 
-        //Google Charts
+        // Google Charts
 
     });
 
+    // Go back to previous stage
+    $(backBtn).click( () => {
+        if(stage == '1A')
+            setStage('0');
+        else if(stage == '2')
+            setStage('1A');
+        else if(stage == '3')
+            setStage('2');
+        location.reload();
+    });
+    // Reset to initial stage
+    $(resetBtn).click( () => {
+        setStage('0');
+        logout();
+        location.reload();
+    });
 
 });
