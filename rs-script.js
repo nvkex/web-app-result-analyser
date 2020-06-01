@@ -7,8 +7,8 @@
  * 
  * APP STAGES:
  * 0 --> About Page
- * 1A --> Login Page
- * 1B --> SignUp Page
+ * 1A --> Login
+ * 1B --> SignUp
  * 2 --> Dashboard
  * 3 --> Result Display
  */
@@ -37,13 +37,28 @@ $(document).ready(function () {
         localStorage.setItem('stage', stage);
     }
 
+    // Login user and set current logged in user
     function login(userID){
         currUsr = userID;
         localStorage.setItem('loggedInUser', currUsr);
     }
 
+    // Set current user to null
     function logout(){
         localStorage.setItem('loggedInUser', null);
+    }
+
+    // Fill dashboard's input boxes with pre-loaded data
+    function fillDashboard(){
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        if(previousData != null){
+            const labels = Array.from(document.querySelectorAll('.label'));
+            const marks = Array.from(document.querySelectorAll('.mrks'));
+            labels.forEach( (label,index) => {
+                label.value = previousData[index].label;
+                marks[index].value = previousData[index].y;
+            })
+        }
     }
 
     // Rendering document according to the stage
@@ -64,8 +79,10 @@ $(document).ready(function () {
             $('.app-info').hide();
             $(".login-container").hide();
             $("#displayName").text(currUsr);
+            fillDashboard();
             $(".dashboard").show();
             $('.result-container').hide();
+
         }
         else if(stage == "3"){
             $('.app-info').hide();
@@ -75,19 +92,19 @@ $(document).ready(function () {
         }
     }
 
-    // only login page visible initially
+    // About page visible initially
     $("#error-msg").hide();
     initStage();
     renderDoc();
 
-    // switch to login page
+    // Switch to login page
     $('#getStarted').click(() => {
         $('.about').css("transform", "rotateX(100deg)");
         $('.app-info').fadeOut(800);
         setStage("1A");
     });
 
-    // on successful login switch to dashboard
+    // On successful login, switch to dashboard
     $("#loginBtn").click(function () {
         if ($("#studentPass").val() == studentPassword[0]) {
             $(".login-container").fadeOut(200);
@@ -101,6 +118,12 @@ $(document).ready(function () {
         }
     });
 
+    // Clear data from input boxes 
+    $('#clearData').click(() => {
+        localStorage.removeItem('subDat');
+        location.reload();
+    });
+
     /**
     * Render Graph in Canvas
     * 
@@ -108,10 +131,9 @@ $(document).ready(function () {
     * Options: Google Charts, D3JS
     * 
     */
-
     $('#submitData').click(() => {
 
-        // switch from dashboard to graph canvas
+        // Switch from dashboard to graph canvas
         $(".dashboard").fadeOut(200);
         $('.result-container').fadeIn(3000);
 
@@ -123,6 +145,9 @@ $(document).ready(function () {
         const stuData = labels.map( (lbl, index) => {
             return {y: marks[index].value, label: lbl.value}
         });
+
+        // Store the input data locally
+        localStorage.setItem('subDat', JSON.stringify(stuData));
 
         //CanvasJS
         var chart = new CanvasJS.Chart("graphCanvas", {
@@ -161,6 +186,7 @@ $(document).ready(function () {
             setStage('2');
         location.reload();
     });
+
     // Reset to initial stage
     $(resetBtn).click( () => {
         setStage('0');
