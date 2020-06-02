@@ -95,6 +95,11 @@ $(document).ready(function () {
         googleDonut(previousData);
     });
 
+    $('#steppedAreaChartBtn').click(() => {
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        googleSteppedArea(previousData);
+    });
+
     // Reset to initial stage
     $(resetBtn).click( () => {
         setStage('0');
