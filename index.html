@@ -1,151 +1,180 @@
 <!Doctype html>
 <html>
-    <head>
-        <title>Student Report</title>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <link rel = "stylesheet" href = "style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
-    </head>
 
-    <body>
-        <!-- Reset Button -->
-        <div class = "reset">
-            <button id = "back"><- Back</button> 
-            <button id = "resetDoc">Reset</button> 
-        </div>
+<head>
+    <title>Student Report</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+</head>
 
-        <div class = "app-info">
-            <div class = "container">
-                <div class = "about" align = "center">
-                    <h1 class = "text-success">Report Analyser</h1>
+<body>
+
+    <!-- Reset Button -->
+    <div class="reset">
+        <button id="back">
+            <- Back</button>
+                <button id="resetDoc">Reset</button>
+    </div>
+
+    <div class="app-info">
+        <div class="container">
+            <div class="about" align="center">
+                <h1 class="text-success">Report Analyser</h1>
+                <br>
+                <p class="bg-secondary">Analyse your results with easy graphical representations</p>
+                <h2>Contact</h3>
                     <br>
-                    <p class = "bg-secondary">Analyse your results with easy graphical representations</p>
-                    <h2>Contact</h3>
-                        <br>
-                    <span><a href = "https://github.com/nvkex">Github</a></span> |
-                    <span><a href = "https://sourcerer.io/nvkex">Sourcerer</a></span>
+                    <span><a href="https://github.com/nvkex">Github</a></span> |
+                    <span><a href="https://sourcerer.io/nvkex">Sourcerer</a></span>
                     <p></p>
                     <br><br>
                     <button id="getStarted">Get Started..</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Alert Bar -->
+
+        <div class="alert alert-danger alert-dismissible fade show" id="error-msg">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Error! </strong>Password doesn't match with registered Roll Number!
+        </div>
+
+        <!-- Header/Navbar -->
+
+        <div>
+
+        </div>
+
+        <!-- Login dialog box -->
+
+        <div class="login-container" align="center">
+            <div class="login">
+                <h1 class="display-2" style="color:white">Login</h1>
+                <br>
+                <table cellpadding="10">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-lg" placeholder="Name"
+                                    id="studentName">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control form-control-lg" placeholder="Roll Number"
+                                    id="rollNo">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-lg" placeholder="Password"
+                                    id="studentPass">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <button class="btn btn-outline-success btn-lg" id="loginBtn">Login</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- STUDENT DASHBOARD -->
+        <!-- This body is hidden initially and will be displayed after login-->
+
+        <div class="dashboard">
+            <br><br>
+            <h1 class="display-3">Welcome <span id="displayName"></span>!</h1>
+
+            <div class="entry-box container" align="center">
+                <h1 style="font-family:'Courier New', Courier, monospace">Subject Data</h1>
+                <br>
+                <table cellpadding="20" id="subjectData">
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Max Marks</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="label"></td>
+                        <td><input type="number" class="mrks"></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="label"></td>
+                        <td><input type="number" class="mrks"></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="label"></td>
+                        <td><input type="number" class="mrks"></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="label"></td>
+                        <td><input type="number" class="mrks"></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="label"></td>
+                        <td><input type="number" class="mrks"></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <button class="btn btn-outline-info" id="submitData">Submit</button>
+                            <button class="btn btn-outline-info" id="clearData">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Report Card -->
+        <div class = "final-stage">
+            <ul class ="chart-list" >
+                <li><button id="barChartBtn">Bar Chart</button></li>
+                <li><button id="pieChartBtn">Pie Chart</button></li>
+                <li><button id="donutChartBtn">Donut Chart</button></li>
+                <li><button id="steppedAreaChartBtn">Stepped Area Chart</button></li>
+            </ul>
+            <div class="container result-container">
+                <div id="graphCanvas">
                 </div>
             </div>
         </div>
 
-        <div class = "container">
+    </div>
 
-            <!-- Alert Bar -->
+    <!-- Main Script -->
+    <script src="src/rs-script.js"></script>
+    <script src="src/jsFuncs.js"></script>
+    <script src="src/jquery-handlers.js"></script>
 
-            <div class="alert alert-danger alert-dismissible fade show" id = "error-msg">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Error! </strong>Password doesn't match with registered Roll Number!
-              </div>
+    <!-- canvasjs -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-            <!-- Header/Navbar -->
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</body>
 
-            <div>
-
-            </div>
-
-            <!-- Login dialog box -->
-            
-            <div class = "login-container" align = "center">
-                <div class = "login">
-                    <h1 class = "display-2" style = "color:white">Login</h1>
-                    <br>
-                        <table cellpadding = "10">
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-lg" placeholder="Name" id="studentName">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control form-control-lg" placeholder="Roll Number" id = "rollNo">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-lg" placeholder="Password" id = "studentPass">
-                                      </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align = "center">
-                                    <button class = "btn btn-outline-success btn-lg" id = "loginBtn">Login</button>
-                                </td>
-                            </tr>
-                        </table>
-                </div>
-            </div>
-
-            <!-- STUDENT DASHBOARD -->
-            <!-- This body is hidden initially and will be displayed after login-->
-
-            <div class = "dashboard">
-                <br><br>
-                <h1 class = "display-3">Welcome <span id = "displayName"></span>!</h1>
-
-                <div class = "entry-box container" align = "center">
-                    <h1 style = "font-family:'Courier New', Courier, monospace">Subject Data</h1>
-                    <br>
-                    <table cellpadding = "20" id = "subjectData">
-                        <tr>
-                            <th>Subject</th>
-                            <th>Marks</th>
-                            <th>Max Marks</th>
-                        </tr>
-                        <tr>
-                            <td><input type = "text" class = "label"></td>
-                            <td><input type = "number" class = "mrks"></td>
-                            <td><input type = "number" ></td>
-                        </tr>
-                        <tr>
-                            <td><input type = "text" class = "label"></td>
-                            <td><input type = "number" class = "mrks"></td>
-                            <td><input type = "number" ></td>
-                        </tr>
-                        <tr>
-                            <td><input type = "text" class = "label"></td>
-                            <td><input type = "number" class = "mrks"></td>
-                            <td><input type = "number" ></td>
-                        </tr>
-                        <tr>
-                            <td><input type = "text" class = "label"></td>
-                            <td><input type = "number" class = "mrks"></td>
-                            <td><input type = "number" ></td>
-                        </tr>
-                        <tr>
-                            <td><input type = "text" class = "label"></td>
-                            <td><input type = "number" class = "mrks"></td>
-                            <td><input type = "number" ></td>
-                        </tr>
-                        <tr>
-                            <td colspan = "3" align = "center"><button class = "btn btn-outline-info" id="submitData">Submit</button></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Report Card -->
-
-            <div class = "container result-container">
-                <div id = "graphCanvas">
-                    
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Script -->
-        <script src = "rs-script.js"></script>
-
-        <!-- canvasjs -->
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    </body>
 </html>

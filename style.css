@@ -17,7 +17,7 @@ th{
     left: 8px;
 }
 
-.reset button{
+.reset button, .chart-list button{
     transition: 0.4s;
     outline:none;
     color:rgb(199, 138, 138);
@@ -29,7 +29,7 @@ th{
     
 }
 
-.reset button:hover{
+.reset button:hover, .chart-list button:hover{
     transform:rotate(8deg);
     background-color: rgb(209, 159, 66);
     color:white;
@@ -145,7 +145,7 @@ th{
 }
 
 .result-container{
-    margin:100px 0px auto;
+    margin:110px 0px auto;
     height:500px;
     color:lightgrey;
     padding:50px;
@@ -153,3 +153,26 @@ th{
     border-radius:20px;
 }
 
+#graphCanvas{
+    height:100%;
+    width: 100%;
+}
+
+.chart-list{
+    border-top:2px solid rgb(199, 138, 138);
+    border-radius: 0 0 20px 20px;
+    padding:12px;
+    background-color:#2C3A47;
+    position:fixed;
+    list-style-type: none;
+    top:50px;
+}
+
+.chart-list li{
+    margin:0 6px;
+    display:inline;
+}
+
+.chart-list button:hover{
+    transform:scale(1.05);
+}
