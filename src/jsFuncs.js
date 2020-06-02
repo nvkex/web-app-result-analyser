@@ -11,6 +11,7 @@ function initStage() {
     currUsr = localStorage.getItem('loggedInUser') != null ? localStorage.getItem('loggedInUser') : null;
 }
 
+
 // Setting current stage
 function setStage(level) {
     stage = level;
@@ -47,13 +48,13 @@ function renderDoc() {
         $('.app-info').show();
         $(".login-container").show();
         $(".dashboard").hide();
-        $('.result-container').hide();
+        $('.final-stage').hide();
     }
     else if (stage == "1A") {
         $('.app-info').hide();
         $(".login-container").show();
         $(".dashboard").hide();
-        $('.result-container').hide();
+        $('.final-stage').hide();
     }
     else if (stage == "2") {
         $('.app-info').hide();
@@ -61,13 +62,41 @@ function renderDoc() {
         $("#displayName").text(currUsr);
         fillDashboard();
         $(".dashboard").show();
-        $('.result-container').hide();
+        $('.final-stage').hide();
 
     }
     else if (stage == "3") {
         $('.app-info').hide();
         $(".login-container").hide();
         $(".dashboard").hide();
-        $('.result-container').show();
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        if(previousData != null){
+            canvasCharts(previousData);
+        }
+        $('.final-stage').show();
     }
+}
+
+function canvasCharts(stuData){
+    var chart = new CanvasJS.Chart("graphCanvas", {
+        animationEnabled: true,
+        theme: "dark2",
+        title: {
+            text: "Student Report"
+        },
+        axisY: {
+            title: "Marks"
+        },
+        data: [{
+            type: "column",
+            dataPoints: [
+               {y: parseInt(stuData[0].y), label: stuData[0].label},
+               {y: parseInt(stuData[1].y), label: stuData[1].label},
+               {y: parseInt(stuData[2].y), label: stuData[2].label},
+               {y: parseInt(stuData[3].y), label: stuData[3].label},
+               {y: parseInt(stuData[4].y), label: stuData[4].label}
+            ]
+        }]
+    });
+    chart.render();
 }
