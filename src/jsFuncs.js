@@ -100,3 +100,28 @@ function canvasCharts(stuData){
     });
     chart.render();
 }
+
+function googlePie(stuData){
+    google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Subject', 'Score'],
+          [stuData[0].label, parseInt(stuData[0].y)],
+          [stuData[1].label, parseInt(stuData[1].y)],
+          [stuData[2].label, parseInt(stuData[2].y)],
+          [stuData[3].label, parseInt(stuData[3].y)],
+          [stuData[4].label, parseInt(stuData[4].y)]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
+
+        chart.draw(data, options);
+      }
+}
