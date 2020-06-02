@@ -119,8 +119,37 @@ function googlePie(stuData){
         var options = {
           title: 'Student Report',
           backgroundColor: '#2C3A47',
-          legend: {textStyle: {color: 'white'}},
-          titleTextStyle: {color: 'white',fontSize: 30},
+          legend: {textStyle: {color: 'white',fontName: 'rubik'}},
+          titleTextStyle: {color: 'white',fontSize: 30, fontName: 'rubik'},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
+
+        chart.draw(data, options);
+      }
+}
+
+function googleDonut(stuData){
+    google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Subject', 'Score'],
+          [stuData[0].label, parseInt(stuData[0].y)],
+          [stuData[1].label, parseInt(stuData[1].y)],
+          [stuData[2].label, parseInt(stuData[2].y)],
+          [stuData[3].label, parseInt(stuData[3].y)],
+          [stuData[4].label, parseInt(stuData[4].y)]
+        ]);
+
+        var options = {
+          title: 'Student Report',
+          pieHole: 0.4,
+          backgroundColor: '#2C3A47',
+          legend: {textStyle: {color: 'white', fontName: 'rubik'}},
+          titleTextStyle: {color: 'white',fontSize: 30, fontName: 'rubik'},
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
