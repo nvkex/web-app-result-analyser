@@ -117,7 +117,10 @@ function googlePie(stuData){
         ]);
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'Student Report',
+          backgroundColor: '#2C3A47',
+          legend: {textStyle: {color: 'white'}},
+          titleTextStyle: {color: 'white',fontSize: 30},
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
