@@ -90,6 +90,11 @@ $(document).ready(function () {
         googlePie(previousData);
     });
 
+    $('#donutChartBtn').click(() => {
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        googleDonut(previousData);
+    });
+
     // Reset to initial stage
     $(resetBtn).click( () => {
         setStage('0');
