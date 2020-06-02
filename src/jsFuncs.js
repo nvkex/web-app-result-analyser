@@ -70,14 +70,15 @@ function renderDoc() {
         $(".login-container").hide();
         $(".dashboard").hide();
         previousData = JSON.parse(localStorage.getItem('subDat'));
-        if(previousData != null){
+        if (previousData != null) {
             canvasCharts(previousData);
         }
         $('.final-stage').show();
     }
 }
 
-function canvasCharts(stuData){
+// Bar Chart API
+function canvasCharts(stuData) {
     var chart = new CanvasJS.Chart("graphCanvas", {
         animationEnabled: true,
         theme: "dark2",
@@ -90,70 +91,104 @@ function canvasCharts(stuData){
         data: [{
             type: "column",
             dataPoints: [
-               {y: parseInt(stuData[0].y), label: stuData[0].label},
-               {y: parseInt(stuData[1].y), label: stuData[1].label},
-               {y: parseInt(stuData[2].y), label: stuData[2].label},
-               {y: parseInt(stuData[3].y), label: stuData[3].label},
-               {y: parseInt(stuData[4].y), label: stuData[4].label}
+                { y: parseInt(stuData[0].y), label: stuData[0].label },
+                { y: parseInt(stuData[1].y), label: stuData[1].label },
+                { y: parseInt(stuData[2].y), label: stuData[2].label },
+                { y: parseInt(stuData[3].y), label: stuData[3].label },
+                { y: parseInt(stuData[4].y), label: stuData[4].label }
             ]
         }]
     });
     chart.render();
 }
 
-function googlePie(stuData){
-    google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+// Pie Chart API
+function googlePie(stuData) {
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Subject', 'Score'],
-          [stuData[0].label, parseInt(stuData[0].y)],
-          [stuData[1].label, parseInt(stuData[1].y)],
-          [stuData[2].label, parseInt(stuData[2].y)],
-          [stuData[3].label, parseInt(stuData[3].y)],
-          [stuData[4].label, parseInt(stuData[4].y)]
+            ['Subject', 'Score'],
+            [stuData[0].label, parseInt(stuData[0].y)],
+            [stuData[1].label, parseInt(stuData[1].y)],
+            [stuData[2].label, parseInt(stuData[2].y)],
+            [stuData[3].label, parseInt(stuData[3].y)],
+            [stuData[4].label, parseInt(stuData[4].y)]
         ]);
 
         var options = {
-          title: 'Student Report',
-          backgroundColor: '#2C3A47',
-          legend: {textStyle: {color: 'white',fontName: 'rubik'}},
-          titleTextStyle: {color: 'white',fontSize: 30, fontName: 'rubik'},
+            title: 'Student Report',
+            backgroundColor: '#2C3A47',
+            legend: { textStyle: { color: 'white', fontName: 'rubik' } },
+            titleTextStyle: { color: 'white', fontSize: 30, fontName: 'rubik' },
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
 
         chart.draw(data, options);
-      }
+    }
 }
 
-function googleDonut(stuData){
-    google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+// Donut Chart API
+function googleDonut(stuData) {
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Subject', 'Score'],
-          [stuData[0].label, parseInt(stuData[0].y)],
-          [stuData[1].label, parseInt(stuData[1].y)],
-          [stuData[2].label, parseInt(stuData[2].y)],
-          [stuData[3].label, parseInt(stuData[3].y)],
-          [stuData[4].label, parseInt(stuData[4].y)]
+            ['Subject', 'Score'],
+            [stuData[0].label, parseInt(stuData[0].y)],
+            [stuData[1].label, parseInt(stuData[1].y)],
+            [stuData[2].label, parseInt(stuData[2].y)],
+            [stuData[3].label, parseInt(stuData[3].y)],
+            [stuData[4].label, parseInt(stuData[4].y)]
         ]);
 
         var options = {
-          title: 'Student Report',
-          pieHole: 0.4,
-          backgroundColor: '#2C3A47',
-          legend: {textStyle: {color: 'white', fontName: 'rubik'}},
-          titleTextStyle: {color: 'white',fontSize: 30, fontName: 'rubik'},
+            title: 'Student Report',
+            pieHole: 0.4,
+            backgroundColor: '#2C3A47',
+            legend: { textStyle: { color: 'white', fontName: 'rubik' } },
+            titleTextStyle: { color: 'white', fontSize: 30, fontName: 'rubik' },
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('graphCanvas'));
 
         chart.draw(data, options);
-      }
+    }
+}
+
+// Stepped Area Chart API
+function googleSteppedArea(stuData) {
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Subject', 'Your Score', 'Maximum Score'],
+            [stuData[0].label, parseInt(stuData[0].y), 100],
+            [stuData[1].label, parseInt(stuData[1].y), 100],
+            [stuData[2].label, parseInt(stuData[2].y), 100],
+            [stuData[3].label, parseInt(stuData[3].y), 100],
+            [stuData[4].label, parseInt(stuData[4].y), 100]
+        ]);
+
+        var options = {
+            title: 'Student Report',
+            vAxis: { title: 'Marks' },
+            isStacked: true,
+            backgroundColor: '#2C3A47',
+            legend: { textStyle: { color: 'white', fontName: 'rubik' } },
+            titleTextStyle: { color: 'white', fontSize: 30, fontName: 'rubik' },
+            hAxis: { textStyle: {color: 'white'}},
+            vAxis: { textStyle: {color: 'white'}}
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('graphCanvas'));
+
+        chart.draw(data, options);
+    }
 }
