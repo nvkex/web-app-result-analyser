@@ -41,8 +41,9 @@ $(document).ready(function () {
     /**
     * Render Graph in Canvas
     * 
-    * Current Libraries: CanvasJS
-    * Options: Google Charts, D3JS
+    * Default Chart: CanvasJS Bar Chart
+    * Current Libraries: CanvasJS, Google Charts
+    * Options:  D3JS
     * 
     */
     $('#submitData').click(() => {
@@ -63,9 +64,8 @@ $(document).ready(function () {
         // Store the input data locally
         localStorage.setItem('subDat', JSON.stringify(stuData));
 
-        //CanvasJS
+        // Load Default Chart
         canvasCharts(stuData);
-        // Google Charts
 
     });
 
@@ -78,6 +78,16 @@ $(document).ready(function () {
         else if(stage == '3')
             setStage('2');
         location.reload();
+    });
+
+    $('#barChartBtn').click(() => {
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        canvasCharts(previousData);
+    });
+
+    $('#pieChartBtn').click(() => {
+        previousData = JSON.parse(localStorage.getItem('subDat'));
+        googlePie(previousData);
     });
 
     // Reset to initial stage
